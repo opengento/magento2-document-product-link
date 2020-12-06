@@ -9,8 +9,8 @@ namespace Opengento\DocumentProductLink\ViewModel\Product;
 
 use Magento\Catalog\Helper\Data;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Opengento\Document\Model\ResourceModel\Document\CollectionFactory;
 use Opengento\Document\Model\ResourceModel\Document\Collection;
+use Opengento\Document\Model\ResourceModel\Document\CollectionFactory;
 use Opengento\DocumentProductLink\Model\Document\Collection\CollectionModifier;
 
 final class DocumentLink implements ArgumentInterface

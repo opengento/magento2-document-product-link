@@ -9,8 +9,8 @@ namespace Opengento\DocumentProductLink\ViewModel\Document;
 
 use Magento\Catalog\Model\Config;
 use Magento\Catalog\Model\Product\Visibility;
-use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
 use Magento\Catalog\Model\ResourceModel\Product\Collection;
+use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 

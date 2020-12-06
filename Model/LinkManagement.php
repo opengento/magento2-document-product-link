@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Opengento\DocumentProductLink\Model;
 
-use Opengento\DocumentProductLink\Model\ResourceModel\DocumentProductLink;
 use Opengento\DocumentProductLink\Api\LinkManagementInterface;
+use Opengento\DocumentProductLink\Model\ResourceModel\DocumentProductLink;
 
 final class LinkManagement implements LinkManagementInterface
 {

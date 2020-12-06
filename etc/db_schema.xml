@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © OpenGento, All rights reserved.
+ * See LICENSE bundled with this library for license details.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="opengento_document_pivot" resource="default" engine="innodb" comment="opengento_document_pivot">
+        <column xsi:type="int" name="pivot_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Pivot ID"/>
+        <column xsi:type="int" name="document_id" padding="10" unsigned="true" nullable="false" identity="false" comment="Document ID"/>
+        <column xsi:type="varchar" name="identifier" nullable="true" length="255" comment="Pivot Identifier"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="pivot_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="OPENGENTO_DOCUMENT_PIVOT_DOCUMENT_ID_OPENGENTO_DOCUMENT_ENTT_ID" table="opengento_document_pivot" column="document_id" referenceTable="opengento_document" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="OPENGENTO_DOCUMENT_PIVOT_DOCUMENT_ID">
+            <column name="document_id"/>
+        </constraint>
+        <index referenceId="OPENGENTO_DOCUMENT_PIVOT_IDENTIFIER" indexType="btree">
+            <column name="identifier"/>
+        </index>
+    </table>
+    <table name="opengento_document_product_link" resource="default" engine="innodb" comment="opengento_document_product_link">
+        <column xsi:type="int" name="link_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Link ID"/>
+        <column xsi:type="int" name="document_id" padding="10" unsigned="true" nullable="false" identity="false" comment="Document ID"/>
+        <column xsi:type="int" name="product_id" padding="10" unsigned="true" nullable="false" identity="false" comment="Product ID"/>
+        <column xsi:type="boolean" name="is_user_defined" nullable="false" comment="Is Link Defined by User"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="link_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="OPENGENTO_DOCUMENT_PRD_LNK_PRD_ID_OPENGENTO_DOCUMENT_ENTT_ID" table="opengento_document_product_link" column="document_id" referenceTable="opengento_document" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="OPENGENTO_DOCUMENT_PRD_LNK_PRD_ID_CAT_PRD_ENTT_ENTT_ID" table="opengento_document_product_link" column="product_id" referenceTable="catalog_product_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="OPENGENTO_DOCUMENT_PRODUCT_LINK_DOCUMENT_ID_PRODUCT_ID">
+            <column name="document_id"/>
+            <column name="product_id"/>
+        </constraint>
+        <index referenceId="OPENGENTO_DOCUMENT_PRODUCT_LINK_IS_USER_DEFINED" indexType="btree">
+            <column name="is_user_defined"/>
+        </index>
+    </table>
+</schema>
