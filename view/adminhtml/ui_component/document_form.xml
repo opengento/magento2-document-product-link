@@ -1,0 +1,188 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © OpenGento, All rights reserved.
+ * See LICENSE bundled with this library for license details.
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="document_information">
+        <input name="pivot_identifier" sortOrder="35">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Pivot Identifier</label>
+                <visible>true</visible>
+                <dataScope>pivot_identifier</dataScope>
+            </settings>
+        </input>
+    </fieldset>
+    <fieldset name="document_product_links" sortOrder="20">
+        <settings>
+            <label translate="true">Document Product Links</label>
+        </settings>
+        <container name="document_product_links_button_set" template="ui/form/components/complex" sortOrder="10">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="content" xsi:type="string" translate="true">In order to associate the document to products, product links can be managed there.</item>
+                    <item name="label" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+            <button name="document_product_links_button_add">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="actions" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="targetName" xsi:type="string">document_form.document_form.document_product_links.product_links_modal</item>
+                                <item name="actionName" xsi:type="string">toggleModal</item>
+                            </item>
+                            <item name="1" xsi:type="array">
+                                <item name="targetName" xsi:type="string">document_form.document_form.document_product_links.product_links_modal.document_product_listing</item>
+                                <item name="actionName" xsi:type="string">render</item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <title translate="true">Add Product Links</title>
+                </settings>
+            </button>
+        </container>
+        <modal name="product_links_modal" sortOrder="15">
+            <settings>
+                <options>
+                    <option name="title" xsi:type="string">Product Links</option>
+                    <option name="buttons" xsi:type="array">
+                        <item name="0" xsi:type="array">
+                            <item name="text" xsi:type="string" translate="true">Cancel</item>
+                            <item name="actions" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">${ $.name }</item>
+                                    <item name="actionName" xsi:type="string">actionCancel</item>
+                                </item>
+                            </item>
+                        </item>
+                        <item name="1" xsi:type="array">
+                            <item name="text" xsi:type="string" translate="true">Add Selected Product(s)</item>
+                            <item name="class" xsi:type="string">action-primary</item>
+                            <item name="actions" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">index = document_product_listing</item>
+                                    <item name="actionName" xsi:type="string">save</item>
+                                </item>
+                                <item name="1" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">${ $.name }</item>
+                                    <item name="actionName" xsi:type="string">closeModal</item>
+                                </item>
+                            </item>
+                        </item>
+                    </option>
+                </options>
+                <onCancel>closeModal</onCancel>
+            </settings>
+            <insertListing name="document_product_listing">
+                <settings>
+                    <dataLinks>
+                        <exports>true</exports>
+                        <imports>false</imports>
+                    </dataLinks>
+                    <externalFilterMode>true</externalFilterMode>
+                    <externalProvider>${ $.ns }.document_product_listing_data_source</externalProvider>
+                    <selectionsProvider>${ $.ns }.${ $.ns }.product_columns.ids</selectionsProvider>
+                    <dataScope>document_product_listing</dataScope>
+                    <ns>document_product_listing</ns>
+                </settings>
+            </insertListing>
+        </modal>
+        <dynamicRows name="document_product_links_grid" component="Magento_Ui/js/dynamic-rows/dynamic-rows-grid" template="ui/dynamic-rows/templates/grid" sortOrder="20">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="columnsHeaderAfterRender" xsi:type="boolean">true</item>
+                    <item name="dataProvider" xsi:type="string">data.document_product_listing</item>
+                    <item name="itemTemplate" xsi:type="string">record</item>
+                    <item name="map" xsi:type="array">
+                        <item name="entity_id" xsi:type="string">entity_id</item>
+                        <item name="name" xsi:type="string">name</item>
+                        <item name="sku" xsi:type="string">sku</item>
+                        <item name="type_id" xsi:type="string">type_id</item>
+                    </item>
+                    <item name="identificationProperty" xsi:type="string">entity_id</item>
+                    <item name="identificationDRProperty" xsi:type="string">entity_id</item>
+                    <item name="deleteButtonLabel" xsi:type="string" translate="true">Unlink</item>
+                </item>
+            </argument>
+            <settings>
+                <componentType>dynamicRows</componentType>
+                <label/>
+                <additionalClasses>
+                    <class name="admin__field-wide">true</class>
+                </additionalClasses>
+                <dndConfig>
+                    <param name="enabled" xsi:type="boolean">false</param>
+                </dndConfig>
+                <addButton>false</addButton>
+                <links>
+                    <link name="insertData">${ $.provider }:${ $.dataProvider }</link>
+                </links>
+                <columnsHeader>false</columnsHeader>
+                <dataScope/>
+            </settings>
+            <container name="record" component="Magento_Ui/js/dynamic-rows/record">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="isTemplate" xsi:type="boolean">true</item>
+                        <item name="is_collection" xsi:type="boolean">true</item>
+                        <item name="componentType" xsi:type="string">container</item>
+                        <item name="dataScope" xsi:type="string"/>
+                    </item>
+                </argument>
+                <input name="entity_id" template="ui/dynamic-rows/cells/text" sortOrder="10">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="fit" xsi:type="boolean">true</item>
+                        </item>
+                    </argument>
+                    <settings>
+                        <dataType>text</dataType>
+                        <label translate="true">ID</label>
+                        <dataScope>entity_id</dataScope>
+                    </settings>
+                </input>
+                <input name="name" template="ui/dynamic-rows/cells/text" sortOrder="20">
+                    <settings>
+                        <dataType>text</dataType>
+                        <label translate="true">Name</label>
+                        <dataScope>name</dataScope>
+                    </settings>
+                </input>
+                <input name="sku" template="ui/dynamic-rows/cells/text" sortOrder="30">
+                    <settings>
+                        <dataType>text</dataType>
+                        <label translate="true">SKU</label>
+                        <dataScope>sku</dataScope>
+                    </settings>
+                </input>
+                <input name="type_id" template="ui/dynamic-rows/cells/text" sortOrder="40">
+                    <settings>
+                        <dataType>text</dataType>
+                        <label translate="true">Type</label>
+                        <dataScope>type_id</dataScope>
+                    </settings>
+                </input>
+                <actionDelete sortOrder="50">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="fit" xsi:type="boolean">true</item>
+                        </item>
+                    </argument>
+                    <settings>
+                        <dataType>text</dataType>
+                        <label translate="true">Actions</label>
+                        <additionalClasses>
+                            <class name="data-grid-actions-cell">true</class>
+                        </additionalClasses>
+                    </settings>
+                </actionDelete>
+            </container>
+        </dynamicRows>
+    </fieldset>
+</form>

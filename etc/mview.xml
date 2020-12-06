@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © OpenGento, All rights reserved.
+ * See LICENSE bundled with this library for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Mview/etc/mview.xsd">
+    <view id="opengento_product_document_link" class="Opengento\DocumentProductLink\Model\Mview\ProductLink" group="indexer">
+        <subscriptions>
+            <table name="catalog_product_entity" entity_column="entity_id"/>
+        </subscriptions>
+    </view>
+    <view id="opengento_document_product_link" class="Opengento\DocumentProductLink\Model\Mview\DocumentLink" group="indexer">
+        <subscriptions>
+            <table name="opengento_document" entity_column="entity_id"/>
+        </subscriptions>
+    </view>
+</config>

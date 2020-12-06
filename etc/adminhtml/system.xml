@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © OpenGento, All rights reserved.
+ * See LICENSE bundled with this library for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="catalog">
+            <resource>Opengento_Document::settings</resource>
+            <group id="opengento_document_product_link" translate="label" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="320">
+                <label>Product Documents</label>
+                <field id="region_zones" translate="label" type="text" showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="10">
+                    <label>Document Product Link</label>
+                    <frontend_model>Opengento\DocumentProductLink\Block\Adminhtml\Config\Form\Field\Link</frontend_model>
+                    <backend_model>Opengento\DocumentProductLink\Model\Config\Backend\Indexer</backend_model>
+                    <config_path>opengento_document_type/product_link/pivot_field</config_path>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

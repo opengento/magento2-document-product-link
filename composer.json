@@ -1,0 +1,30 @@
+{
+    "name": "opengento/module-document-product-link",
+    "version": "1.0.0",
+    "description": "N/A",
+    "type": "magento2-module",
+    "require": {
+        "magento/framework": "*",
+        "magento/module-catalog": "*",
+        "magento/module-config": "*",
+        "magento/module-eav": "*",
+        "magento/module-ui": "*",
+        "opengento/module-document": "*"
+    },
+    "require-dev": {
+        "magento/magento-coding-standard": "^5",
+        "magento/marketplace-eqp": "^4.0",
+        "roave/security-advisories": "dev-master"
+    },
+    "license": [
+        "MIT"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Opengento\\DocumentProductLink\\": ""
+        }
+    }
+}
