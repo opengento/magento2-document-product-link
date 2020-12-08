@@ -55,8 +55,8 @@ final class ProductLink implements ArgumentInterface
         $collection->addTaxPercents();
         $collection->addUrlRewrite();
         $collection->setVisibility($this->productVisibility->getVisibleInCatalogIds());
-        $collection->joinTable(['mdpl' => 'opengento_document_product_link'], 'product_id=entity_id', '');
-        $collection->getSelect()->where('mdpl.document_id IN (?)', $documentIds);
+        $collection->joinTable(['odpl' => 'opengento_document_product_link'], 'product_id=entity_id', '');
+        $collection->getSelect()->where('odpl.document_id IN (?)', $documentIds);
 
         return $collection;
     }

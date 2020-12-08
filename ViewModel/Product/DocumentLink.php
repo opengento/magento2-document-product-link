@@ -45,9 +45,9 @@ final class DocumentLink implements ArgumentInterface
         /** @var Collection $collection */
         $collection = $this->collectionFactory->create();
         $this->collectionModifier->apply($collection);
-        $collection->join(['mdpl' => 'opengento_document_product_link'], 'mdpl.document_id=main_table.entity_id', '');
+        $collection->join(['odpl' => 'opengento_document_product_link'], 'odpl.document_id=main_table.entity_id', '');
         if ($this->catalogData->getProduct()) {
-            $collection->addFieldToFilter('mdpl.product_id', ['eq' => $this->catalogData->getProduct()->getId()]);
+            $collection->addFieldToFilter('odpl.product_id', ['eq' => $this->catalogData->getProduct()->getId()]);
         }
 
         return $collection;
