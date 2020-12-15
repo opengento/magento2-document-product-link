@@ -7,7 +7,7 @@
 -->
 <form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <fieldset name="document_information">
-        <input name="pivot_identifier" sortOrder="35">
+        <input name="pivot_identifier" sortOrder="45">
             <settings>
                 <dataType>text</dataType>
                 <label translate="true">Pivot Identifier</label>
