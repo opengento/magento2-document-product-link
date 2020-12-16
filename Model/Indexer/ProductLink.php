@@ -8,6 +8,8 @@ declare(strict_types=1);
 namespace Opengento\DocumentProductLink\Model\Indexer;
 
 use Magento\Framework\Indexer\ActionInterface;
+use Magento\Framework\Indexer\CacheContext;
+use Opengento\Document\Model\Document;
 use Opengento\DocumentProductLink\Model\ResourceModel\DocumentProductLink;
 
 class ProductLink implements ActionInterface
@@ -17,27 +19,37 @@ class ProductLink implements ActionInterface
      */
     private $documentProductLink;
 
+    /**
+     * @var CacheContext
+     */
+    private $cacheContext;
+
     public function __construct(
-        DocumentProductLink $documentProductLink
+        DocumentProductLink $documentProductLink,
+        CacheContext $cacheContext
     ) {
         $this->documentProductLink = $documentProductLink;
+        $this->cacheContext = $cacheContext;
     }
 
     public function executeFull(): void
     {
         $this->documentProductLink->deleteIndexerLinks();
         $this->documentProductLink->insertLinks();
+
+        $this->cacheContext->registerTags([Document::CACHE_TAG]);
     }
 
     public function executeList(array $ids): void
     {
         $this->documentProductLink->deleteLinksByProducts($ids);
         $this->documentProductLink->insertLinksByProducts($ids);
+
+        $this->cacheContext->registerTags([Document::CACHE_TAG]);
     }
 
     public function executeRow($entityId): void
     {
-        $this->documentProductLink->deleteLinksByProducts([$entityId]);
         $this->executeList([$entityId]);
     }
 }
