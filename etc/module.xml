@@ -13,6 +13,7 @@
             <module name="Magento_Eav"/>
             <module name="Magento_Ui"/>
             <module name="Opengento_Document"/>
+            <module name="Opengento_DocumentWidget"/>
         </sequence>
     </module>
 </config>

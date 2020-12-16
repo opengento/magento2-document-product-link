@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © OpenGento, All rights reserved.
+ * See LICENSE bundled with this library for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="product.info.details">
+            <block name="product.info.details.documents" as="documents" template="Opengento_DocumentProductLink::product/view/documents.phtml" group="detailed_info">
+                <arguments>
+                    <argument name="urlHelper" xsi:type="object">Opengento\DocumentWidget\ViewModel\Document\Url</argument>
+                    <argument name="imageHelper" xsi:type="object">Opengento\DocumentWidget\ViewModel\Document\Image</argument>
+                    <argument name="documentTypeViewModel" xsi:type="object">Opengento\DocumentWidget\ViewModel\VisibleDocumentType</argument>
+                    <argument name="documentLinkViewModel" xsi:type="object">Opengento\DocumentProductLink\ViewModel\Product\DocumentLink</argument>
+                    <argument name="target" xsi:type="string">_blank</argument>
+                    <argument name="title" xsi:type="string" translate="true">Documents</argument>
+                    <argument name="sort_order" xsi:type="string">20</argument>
+                </arguments>
+                <block name="document.search.result.image.renderer" as="imageRenderer" template="Opengento_DocumentWidget::document/image.phtml"/>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

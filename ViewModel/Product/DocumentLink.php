@@ -30,6 +30,11 @@ final class DocumentLink implements ArgumentInterface
      */
     private $catalogData;
 
+    /**
+     * @var Collection[]
+     */
+    private $collection;
+
     public function __construct(
         CollectionFactory $collectionFactory,
         CollectionModifier $collectionModifier,
@@ -38,17 +43,25 @@ final class DocumentLink implements ArgumentInterface
         $this->collectionFactory = $collectionFactory;
         $this->collectionModifier = $collectionModifier;
         $this->catalogData = $catalogData;
+        $this->collection = [];
     }
 
-    public function getDocuments(): Collection
+    public function getDocuments(?int $productId = null): Collection
+    {
+        if ($productId === null) {
+            $productId = $this->catalogData->getProduct() ? (int) $this->catalogData->getProduct()->getId() : -1;
+        }
+
+        return $this->collection[$productId] ?? $this->collection[$productId] = $this->loadCollection($productId);
+    }
+
+    private function loadCollection(int $productId): Collection
     {
         /** @var Collection $collection */
         $collection = $this->collectionFactory->create();
         $this->collectionModifier->apply($collection);
         $collection->join(['odpl' => 'opengento_document_product_link'], 'odpl.document_id=main_table.entity_id', '');
-        if ($this->catalogData->getProduct()) {
-            $collection->addFieldToFilter('odpl.product_id', ['eq' => $this->catalogData->getProduct()->getId()]);
-        }
+        $collection->addFieldToFilter('odpl.product_id', ['eq' => $productId]);
 
         return $collection;
     }

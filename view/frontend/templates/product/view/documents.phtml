@@ -1,0 +1,58 @@
+<?php
+/**
+ * Copyright © OpenGento, All rights reserved.
+ * See LICENSE bundled with this library for license details.
+ */
+declare(strict_types=1);
+
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Opengento\DocumentProductLink\ViewModel\Product\DocumentLink;
+use Opengento\DocumentWidget\ViewModel\Document\Image;
+use Opengento\DocumentWidget\ViewModel\Document\Url;
+use Opengento\DocumentWidget\ViewModel\DocumentType;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+
+/** @var Url $urlHelper */
+$urlHelper = $block->getData('urlHelper');
+/** @var Image $imageHelper */
+$imageHelper = $block->getData('imageHelper');
+/** @var DocumentType $documentTypeViewModel */
+$documentTypeViewModel = $block->getData('documentTypeViewModel');
+/** @var DocumentLink $documentLinkViewModel */
+$documentLinkViewModel = $block->getData('documentLinkViewModel');
+
+$documents = $documentLinkViewModel->getDocuments();
+
+$target = $block->getData('target') ? 'target="' . $block->getData('target') . '" rel="noopener noreferrer"' : '';
+?>
+<?php if ($documents->getSize()): ?>
+    <?php foreach ($documentTypeViewModel->getList() as $documentType): ?>
+        <?php $subDocuments = $documents->getItemsByColumnValue('type_id', $documentType->getId()); ?>
+        <?php if ($subDocuments): ?>
+            <div class="block document-list document-type-<?= $escaper->escapeHtmlAttr($documentType->getCode()) ?>">
+                <div class="block-title">
+                    <strong><?= $escaper->escapeHtml($documentType->getName()) ?></strong>
+                </div>
+                <div class="block-content">
+                    <ol class="items document-items">
+                        <?php foreach ($subDocuments as $document): ?>
+                            <li class="item document-item">
+                                <a class="document photo document-item-photo" href="<?= $escaper->escapeUrl($urlHelper->getFileUrl($document)) ?>" <?= $target ?>>
+                                    <?= $block->getChildBlock('imageRenderer')->setData('image', $imageHelper->getImage($document, 'document_product_list'))->toHtml() ?>
+                                </a>
+                                <strong class="document name document-item-name">
+                                    <a class="document-item-link" href="<?= $escaper->escapeUrl($urlHelper->getFileUrl($document)) ?>">
+                                        <?= $escaper->escapeHtml($document->getName()) ?>
+                                    </a>
+                                </strong>
+                            </li>
+                        <?php endforeach; ?>
+                    </ol>
+                </div>
+            </div>
+        <?php endif; ?>
+    <?php endforeach; ?>
+<?php endif; ?>
