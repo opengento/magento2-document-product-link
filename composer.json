@@ -20,7 +20,7 @@
         "magento/module-config": "^101.0",
         "magento/module-eav": "^102.0",
         "magento/module-ui": "^101.0",
-        "opengento/module-document": "^1.0"
+        "opengento/module-document": "^1.0",
         "opengento/module-document-widget": "^1.0"
     },
     "require-dev": {
