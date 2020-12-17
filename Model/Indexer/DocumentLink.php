@@ -7,6 +7,7 @@ declare(strict_types=1);
 
 namespace Opengento\DocumentProductLink\Model\Indexer;
 
+use Magento\Catalog\Model\Product;
 use Magento\Framework\Indexer\ActionInterface;
 use Magento\Framework\Indexer\CacheContext;
 use Opengento\Document\Model\Document;
@@ -37,7 +38,7 @@ class DocumentLink implements ActionInterface
         $this->documentProductLink->deleteIndexerLinks();
         $this->documentProductLink->insertLinks();
 
-        $this->cacheContext->registerTags([Document::CACHE_TAG]);
+        $this->cacheContext->registerTags([Document::CACHE_TAG, Product::CACHE_TAG]);
     }
 
     public function executeList(array $ids): void
@@ -46,6 +47,7 @@ class DocumentLink implements ActionInterface
         $this->documentProductLink->insertLinksByDocuments($ids);
 
         $this->cacheContext->registerEntities(Document::CACHE_TAG, $ids);
+        $this->cacheContext->registerTags([Product::CACHE_TAG]);
     }
 
     public function executeRow($entityId): void
