@@ -75,7 +75,7 @@ class DocumentProductLink extends AbstractDb
         if ($documentIds) {
             $this->getConnection()->delete(
                 $this->getMainTable(),
-                ['is_user_defined=?' => 0, 'document_id IN (?)', $documentIds]
+                ['is_user_defined=?' => 0, 'document_id IN (?)' => $documentIds]
             );
         } else {
             $this->deleteIndexerLinks();
@@ -87,7 +87,7 @@ class DocumentProductLink extends AbstractDb
         if ($productIds) {
             $this->getConnection()->delete(
                 $this->getMainTable(),
-                ['is_user_defined=?' => 0, 'product_id IN (?)', $productIds]
+                ['is_user_defined=?' => 0, 'product_id IN (?)' => $productIds]
             );
         } else {
             $this->deleteIndexerLinks();
