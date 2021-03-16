@@ -44,7 +44,7 @@ final class Reindex implements RelationInterface
 
     public function processRelation(AbstractModel $entity): void
     {
-        if ($entity instanceof DocumentInterface && $this->linkProvider->getPivotField($entity->getTypeId())) {
+        if ($entity instanceof DocumentInterface && $this->linkProvider->hasPivotField($entity->getTypeId())) {
             $indexer = $this->indexerRegistry->get(DocumentLink::INDEXER_ID);
             if (!$indexer->isScheduled()) {
                 $this->actionFactory->create($indexer->getActionClass())->executeRow($entity->getId());

@@ -79,7 +79,9 @@ final class LinkSelectFactory
         $pivotFields = array_reduce(
             $collection->getAllIds(),
             function (array $pivotFields, $documentTypeId): array {
-                $pivotFields[$this->linkProvider->getPivotField((int) $documentTypeId)][] = (int) $documentTypeId;
+                if ($this->linkProvider->hasPivotField((int) $documentTypeId)) {
+                    $pivotFields[$this->linkProvider->getPivotField((int) $documentTypeId)][] = (int) $documentTypeId;
+                }
 
                 return $pivotFields;
             },
