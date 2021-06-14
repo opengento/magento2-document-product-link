@@ -82,6 +82,7 @@ final class LinkProvider
         );
 
         $this->pivotFields = [];
+        $this->pivotFieldByType = [];
         foreach ($pivotFields as $pivotField) {
             if (!isset($this->pivotFields[$pivotField['attribute_code']])) {
                 $this->pivotFields[$pivotField['attribute_code']] = [];
