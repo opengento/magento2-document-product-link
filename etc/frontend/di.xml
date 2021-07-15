@@ -10,7 +10,7 @@
         <arguments>
             <argument name="modifiers" xsi:type="array">
                 <item name="select" xsi:type="object">Opengento\Document\Model\Document\Collection\SelectModifier</item>
-                <item name="visibility" xsi:type="object">Opengento\Document\Model\Document\Collection\FrontendVisibilityModifier</item>
+                <item name="visibility" xsi:type="object">Opengento\Document\Model\Document\Collection\VisibilityModifier</item>
             </argument>
         </arguments>
     </type>

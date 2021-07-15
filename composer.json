@@ -30,7 +30,8 @@
     },
     "suggest": {
         "opengento/module-document-product-search": "This module aims to make documents searchable with product keywords in Magento 2.",
-        "opengento/module-document-search": "This module aims to make documents searchable for customers in Magento 2."
+        "opengento/module-document-search": "This module aims to make documents searchable for customers in Magento 2.",
+        "opengento/module-document-restrict": "This module aims to restrict documents by type in Magento 2."
     },
     "license": [
         "MIT"
