@@ -135,7 +135,14 @@
                 <label translate="true">SKU</label>
             </settings>
         </column>
-        <column name="price" class="Magento\Catalog\Ui\Component\Listing\Columns\Price" sortOrder="80">
+        <column name="qty" sortOrder="80">
+            <settings>
+                <addField>true</addField>
+                <filter>textRange</filter>
+                <label translate="true">Quantity</label>
+            </settings>
+        </column>
+        <column name="price" class="Magento\Catalog\Ui\Component\Listing\Columns\Price" sortOrder="90">
             <settings>
                 <addField>true</addField>
                 <filter>textRange</filter>
