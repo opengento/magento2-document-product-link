@@ -21,7 +21,7 @@ This module aims to help merchants to link their documents to products in Magent
 
 Magento 2 Open Source or Commerce edition is required.
 
-###  Composer installation
+### Composer installation
 
 Run the following composer command:
 
